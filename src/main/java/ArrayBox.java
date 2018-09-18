@@ -1,9 +1,12 @@
-import java.util.List;
+import java.util.*;
 
 public class ArrayBox {
 
     public static void main(String[] args) {
         new ArrayBox().countOddNumber();
+    }
+    private int generateRandomNumber() {
+        return Math.abs((int) (Math.random() * 10) - 1);
     }
     public int[] randomArray() {
         int[] array = new int[15];
@@ -14,11 +17,7 @@ public class ArrayBox {
         return array;
     }
 
-    private int generateRandomNumber() {
-        return Math.abs((int) (Math.random() * 10) - 1);
-    }
-
-    public void countOddNumber() {
+    public int countOddNumber() {
         int[] arr = randomArray();
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -27,5 +26,12 @@ public class ArrayBox {
             }
         }
         System.out.println("Count of odd elements: " + count);
+        return count;
+    }
+    public int[] arraySorted()
+    {
+        int[] arr = randomArray();
+        Arrays.sort(arr);
+        return arr;
     }
 }
