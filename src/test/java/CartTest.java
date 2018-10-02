@@ -30,15 +30,23 @@ public class CartTest {
         clicksearch();
         switchToListView();
         addToCart();
-        clickProceedToCheckout();
+        waitForElement();
         plusItemToCart();
-        checkTotalProduct("$54.00");
+        try {
+            checkTotalProduct("$54.00");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         checkTotalShipping("$2.00");
         checkTotal("$56.00");
         checkTax("$0.00");
         checkTotalPrice("$56.00");
         deleteitemFromcart();
-        checkEmptyCart("Your shopping cart is empty.");
+        try {
+            checkEmptyCart("Your shopping cart is empty.");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void typeSearch(String searchInput)
@@ -61,24 +69,32 @@ public class CartTest {
         WebElement addToCartButton = driver.findElement(By.xpath("//a[contains(@title, 'Add to cart')]"));
         addToCartButton.click();
     }
-    private void waitForelement()
+    private void waitForElement()
     {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        new WebDriverWait(.
-                until(ExpectedConditions.presenceOfElementLocated()));
+        WebElement proceedToCheckoutButton = (new WebDriverWait(driver, 15)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@title, 'Proceed to checkout')]"))));
+        proceedToCheckoutButton.click();
     }
-    private void clickProceedToCheckout()
+    /*private void clickProceedToCheckout()
     {
         WebElement proceedToCheckoutButton = driver.findElement(By.xpath("//a[contains(@title, 'Proceed to checkout')]"));
         proceedToCheckoutButton.click();
-    }
+    }*/
     private void plusItemToCart() {
-        WebElement plusItem = driver.findElement(By.xpath("//i[contains(@class, 'icon-plus')]"));
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        WebElement plusItem = (new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//i[contains(@class, 'icon-plus')]"))));
+        //WebElement plusItem = driver.findElement(By.xpath("//i[contains(@class, 'icon-plus')]"));
         plusItem.click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
-    private void checkTotalProduct(String expectedTotalProduct)
-    {
-        String actualTotalProduct = driver.findElement(By.id("total_product")).getText();
+    private void checkTotalProduct(String expectedTotalProduct) throws InterruptedException {
+        Thread.sleep(5000);
+        WebElement actualTotalProductField = driver.findElement(By.id("total_product"));
+                //(new WebDriverWait(driver, 10)
+               // .until(ExpectedConditions.presenceOfElementLocated(By.id("total_product"))));
+        String actualTotalProduct = actualTotalProductField.getText();
         Assert.assertEquals(expectedTotalProduct, actualTotalProduct);
     }
     private void checkTotalShipping(String expectedTotalShipping)
@@ -106,9 +122,13 @@ public class CartTest {
         WebElement deleteItemButton = driver.findElement(By.id("2_7_0_0"));
         deleteItemButton.click();
     }
-    private void checkEmptyCart(String expectedAlert)
-    {
-        String actualAlert = driver.findElement(By.className("alert alert-warning")).getText();
+    private void checkEmptyCart(String expectedAlert) throws InterruptedException {
+        Thread.sleep(5000);
+        //driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        WebElement actualAlertField = driver.findElement(By.xpath("//p[@class= 'alert alert-warning']"));
+                //(new WebDriverWait(driver, 30)
+                //.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class= 'alert alert-warning']"))));
+        String actualAlert = actualAlertField.getText();
         Assert.assertEquals(expectedAlert, actualAlert);
     }
 }
