@@ -1,5 +1,3 @@
-package PACKAGE_NAME;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,7 @@ public class CartTest {
     @Before
     public void mainPageLoad()
     {
-        System.setProperty("webdriver.chrome.driver","D:\\Autotest\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\server\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com/index.php");
@@ -76,24 +74,16 @@ public class CartTest {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@title, 'Proceed to checkout')]"))));
         proceedToCheckoutButton.click();
     }
-    /*private void clickProceedToCheckout()
-    {
-        WebElement proceedToCheckoutButton = driver.findElement(By.xpath("//a[contains(@title, 'Proceed to checkout')]"));
-        proceedToCheckoutButton.click();
-    }*/
     private void plusItemToCart() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebElement plusItem = (new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//i[contains(@class, 'icon-plus')]"))));
         //WebElement plusItem = driver.findElement(By.xpath("//i[contains(@class, 'icon-plus')]"));
         plusItem.click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     private void checkTotalProduct(String expectedTotalProduct) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         WebElement actualTotalProductField = driver.findElement(By.id("total_product"));
-                //(new WebDriverWait(driver, 10)
-               // .until(ExpectedConditions.presenceOfElementLocated(By.id("total_product"))));
         String actualTotalProduct = actualTotalProductField.getText();
         Assert.assertEquals(expectedTotalProduct, actualTotalProduct);
     }
@@ -123,11 +113,8 @@ public class CartTest {
         deleteItemButton.click();
     }
     private void checkEmptyCart(String expectedAlert) throws InterruptedException {
-        Thread.sleep(5000);
-        //driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        Thread.sleep(10000);
         WebElement actualAlertField = driver.findElement(By.xpath("//p[@class= 'alert alert-warning']"));
-                //(new WebDriverWait(driver, 30)
-                //.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class= 'alert alert-warning']"))));
         String actualAlert = actualAlertField.getText();
         Assert.assertEquals(expectedAlert, actualAlert);
     }
