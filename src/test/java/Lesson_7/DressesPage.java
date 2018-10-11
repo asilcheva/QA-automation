@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class DressesPage {
     @FindBy(className = "icon-th-list")
     private WebElement listView;
@@ -13,13 +15,11 @@ public class DressesPage {
     private WebElement sortBySize;
     @FindBy(id = "selectProductSort")
     private WebElement selectProductList;
-    @FindBy(xpath = "//*[@data-id-product=\"7\"]")
-    private WebElement firstitem;
-    @FindBy(xpath = "//*[@data-id-product=\"3\"]")
-    private WebElement seconditem;
-    @FindBy(xpath = "//*[@title = \"Continue shopping\"]")
+    @FindBy(xpath = "//*[contains(@class, 'ajax_add_to_cart_button')]")
+    private List<WebElement> items;
+    @FindBy(xpath = "//div/div/span[@title = 'Continue shopping' and contains(@class, 'continue')]")
     private WebElement continueShopping;
-    @FindBy(xpath = "//*[@title = \"Proceed to checkout\"]")
+    @FindBy(xpath = "//*[@id= 'layer_cart']//*[@title = 'Proceed to checkout']")
     private WebElement proceedToCheckout;
 
     public DressesPage(WebDriver driver) {
@@ -39,12 +39,8 @@ public class DressesPage {
         return new Select(selectProductList);
     }
 
-    public WebElement getFirstitem() {
-        return firstitem;
-    }
-
-    public WebElement getSeconditem() {
-        return seconditem;
+    public List<WebElement> getItems() {
+        return items;
     }
 
     public WebElement getContinueShopping() {
