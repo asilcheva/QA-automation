@@ -5,28 +5,178 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class RegistrationPage {
     private WebDriver driver;
-    public RegistrationPage(WebDriver driver)
+    @FindBy(id = "id_gender1")
+    private WebElement gender1;
+    @FindBy(id = "id_gender2")
+    private WebElement gender2;
+    @FindBy(id = "customer_firstname")
+    private  WebElement firstname;
+    @FindBy(id = "customer_lastname")
+    private WebElement lastname;
+    @FindBy(id ="email")
+    private WebElement email;
+    @FindBy(id = "passwd")
+    private WebElement password;
+    @FindBy(xpath = "//*[@id='days']")
+    private WebElement dayDropDown;
+    @FindBy(xpath = "//*[@id='months']")
+    private WebElement monthDropDown;
+    @FindBy(xpath = "//*[@id='years']")
+    private WebElement yearDropDown;
+    @FindBy(id = "newsletter")
+    private WebElement newsLetterCheckBox;
+    @FindBy(id = "firstname")
+    private WebElement firstnameYA;
+    @FindBy(id = "lastname")
+    private WebElement lastnameYA;
+    @FindBy(id = "company")
+    private WebElement company;
+    @FindBy(id = "address1")
+    private WebElement address1;
+    @FindBy(id = "address2")
+    private WebElement address2;
+    @FindBy(id = "city")
+    private WebElement city;
+    @FindBy(id = "id_state")
+    private WebElement id_state;
+    @FindBy(id = "postcode")
+    private WebElement postcode;
+    @FindBy(id = "id_country")
+    private WebElement idCountry;
+    @FindBy(id = "phone_mobile")
+    private WebElement mobilePhone;
+    @FindBy(id = "alias")
+    private WebElement myAddress;
+    @FindBy(id = "submitAccount")
+    private WebElement registerButton;
+    @FindBy(xpath = "//p[@class = 'info-account']")
+    private WebElement actualMassage;
+    @FindBy(xpath = "//div/ul/li/a[@title = 'Dresses' and contains(text(), 'Dresses')]")
+    private WebElement dresses;
+
+    public WebElement getDresses() {
+        return dresses;
+    }
+   public RegistrationPage(WebDriver driver)
     {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    @FindBy(id = "inputSexId")
-    private WebElement sexId;
-
-
-    private void selectSexTitle(String sexId)
-    {
-        String inputSexId = "id_gender1";
-        if (sexId == "Mrs.")
-        {inputSexId = "id_gender2";}
-        WebElement sexIdSelected = driver.findElement(By.id(inputSexId));
-        sexIdSelected.click();
+    public WebElement getGender1() {
+        return gender1;
     }
+    public WebElement getGender2() {
+        return gender2;
+    }
+
+    public WebElement getFirstname() {
+        return firstname;
+    }
+
+    public WebElement getLastname() {
+        return lastname;
+    }
+
+    public WebElement getEmail() {
+        return email;
+    }
+
+    public WebElement getPassword() {
+        return password;
+    }
+
+    public WebElement getDayDropDown() {
+        return dayDropDown;
+    }
+
+    public WebElement getMonthDropDown() {
+        return monthDropDown;
+    }
+
+    public WebElement getYearDropDown() {
+        return yearDropDown;
+    }
+
+    public WebElement getNewsLetterCheckBox() {
+        return newsLetterCheckBox;
+    }
+
+    public WebElement getFirstnameYA() {
+        return firstnameYA;
+    }
+
+    public WebElement getLastnameYA() {
+        return lastnameYA;
+    }
+
+    public WebElement getCompany() {
+        return company;
+    }
+
+    public WebElement getAddress1() {
+        return address1;
+    }
+
+    public WebElement getAddress2() {
+        return address2;
+    }
+
+    public WebElement getCity() {
+        return city;
+    }
+
+    public WebElement getId_state() {
+        return id_state;
+    }
+
+    public WebElement getPostcode() {
+        return postcode;
+    }
+
+    public WebElement getIdCountry() {
+        return idCountry;
+    }
+
+    public WebElement getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public WebElement getMyAddress() {
+        return myAddress;
+    }
+
+    public WebElement getRegisterButton() {
+        return registerButton;
+    }
+
+    public WebElement getActualMassage() {
+        return actualMassage;
+    }
+    public void selectGender(String selectedGender) {
+        if (selectedGender == getGender1().getText()) {
+            getGender1().click();
+        } else if (selectedGender == getGender2().getText()) {
+            getGender2().click();
+        }
+    }
+    public static void clearAndClick(WebElement webElement, String inputData) {
+        webElement.clear();
+        webElement.sendKeys(inputData);
+    }
+    public static void selectItemFromDropDown(WebElement webElement, String inputValue){
+        Select value = new Select(webElement);
+        value.selectByValue(inputValue);
+    }
+
+    /*
+
     private void typeFirstName(String firstName)
     {
         WebElement inputFirstName = driver.findElement(By.id("customer_firstname"));
@@ -73,13 +223,13 @@ public class RegistrationPage {
     }
     private void typeFirstNameYA(String firstName)
     {
-        WebElement inputFirstName = driver.findElement(By.id("customer_firstname"));
+        WebElement inputFirstName = driver.findElement(By.id("firstname"));
         inputFirstName.clear();
         inputFirstName.sendKeys(firstName);
     }
     private void typeLastNameYA (String lastName)
     {
-        WebElement inputLastName = driver.findElement(By.id("customer_firstname"));
+        WebElement inputLastName = driver.findElement(By.id("lastname"));
         inputLastName.clear();
         inputLastName.sendKeys(lastName);
     }
@@ -147,6 +297,7 @@ public class RegistrationPage {
         String actualMassage = driver.findElement(By.xpath("//p[@class = 'info-account']")).getText();
         Assert.assertEquals(expectedMassage, actualMassage);
     }
+    */
 
 
 }
