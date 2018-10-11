@@ -10,18 +10,15 @@ public class CreateAnAccounPage {
     private WebElement emailAddress;
     @FindBy(id = "SubmitCreate")
     private WebElement createanAccountButton;
+    public WebElement getEmailAddress() {
+        return emailAddress;
+    }
 
+    public WebElement getCreateanAccountButton() {
+        return createanAccountButton;
+    }
     public CreateAnAccounPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
-    }
-
-    public void typeEmailAddress(String emailAddressField) {
-        emailAddress.clear();
-        emailAddress.sendKeys(emailAddressField);
-    }
-
-    public void submitCreateanAccountButton() {
-        createanAccountButton.click();
     }
 
 }
