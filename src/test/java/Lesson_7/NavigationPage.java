@@ -17,26 +17,20 @@ public class NavigationPage {
 
     @FindBy(xpath = "//a[contains(@href, 'controller=my-account')]")
     private WebElement signIn;
-    @FindBy(xpath = "//*[@title=\"Dresses\"]")
-    private WebElement dresses;
     @FindBy(xpath = "//*[contains(@href, 'controller=contact')")
     private WebElement contactUs;
     @FindBy(xpath = "//a[contains(@title, 'View my')]")
-    private  WebElement cart;
+    private WebElement cart;
+
     public void openContactUsPage() {
         contactUs.click();
     }
-    public  void openCartPage()
-    {
+
+    public void openCartPage() {
         cart.click();
     }
 
-    public void openSignPage()
-    {
+    public void openSignPage() {
         signIn.click();
     }
-    public void openDresses()
-    {
-        dresses.click();
-    }
-    }
+}
