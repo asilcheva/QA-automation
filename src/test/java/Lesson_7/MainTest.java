@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-public class MainTest {
+public class MainTest extends BaseTest{
     private static Logger LOG = LogManager.getLogger(MainTest.class);
     String userGender = "Mr.";
     String userFirstname = "galyna";
@@ -43,7 +43,7 @@ public class MainTest {
     String expectedProductItemsQty = "2 Products";
 
 
-    private WebDriver driver;
+
     private NavigationPage navigationPage;
     private RegistrationPage registrationPage;
     private CreateAnAccounPage createAnAccounPage;

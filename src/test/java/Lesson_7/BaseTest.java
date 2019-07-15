@@ -28,7 +28,7 @@ public class BaseTest {
             driver = new FirefoxDriver();}
         //driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://automationpractice.com/index.php");
+        driver.get(config.getProperty("baseurl"));
 
     }
 }
